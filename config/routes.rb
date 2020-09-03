@@ -2,6 +2,9 @@ Rails.application.routes.draw do
   root 'members#index'
   resources :members
   resources :groups
-  resources :group_members, only: [:show]
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  resources :group_members, only: [:index] do
+    member do
+      get :add_head
+    end
+  end
 end

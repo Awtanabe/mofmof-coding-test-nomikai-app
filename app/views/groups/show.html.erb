@@ -5,6 +5,6 @@
   <%= @group.name %>
 </p>
 
-<%= link_to 'group_members', group_member_path(@group.id)%>
+<%= link_to 'group_members', group_members_path(group_id: @group.id)%>
 <%= link_to 'Edit', edit_group_path(@group) %> |
 <%= link_to 'Back', groups_path %>
