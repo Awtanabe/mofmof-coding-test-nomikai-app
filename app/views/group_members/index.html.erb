@@ -3,7 +3,9 @@
 <h3>グループに参加中のメンバー</h3>
 
 <% if flash.present? %>
-  <div class="error"><%= flash['failed'] %></div>
+  <% flash.each do |key, value|%>
+    <%= content_tag(:div, value, class: key)%>
+  <% end %>
 <%end%>
 
 <table>
@@ -32,7 +34,7 @@
   <% @unmembers.each do |member|%>
     <tr>
       <td><%= member.name %></td>
-      <td>参加</td>
+      <td><%= button_to('参加する', group_members_path(group_id: @group.id ,member_id: member.id), method: :post) %></td>
     </tr>
   <%end%>
 </table>
