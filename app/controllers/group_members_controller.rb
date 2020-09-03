@@ -22,12 +22,7 @@ class GroupMembersController < ApplicationController
   end
 
   def add_head
-    @organizer = GroupMember.chose_organizer(params[:group_id])
-    if @organizer.blank?
-      flash[:failed] = '登録できるメンバーがいません' 
-    else
-      @organizer.set_organizer
-    end
-      redirect_to group_members_path(group_id: params[:id])
+    GroupMember.set_organizer(params[:id])
+    redirect_to group_members_path(group_id: params[:id])
   end
 end

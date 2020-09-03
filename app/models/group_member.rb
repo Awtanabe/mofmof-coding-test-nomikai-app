@@ -6,13 +6,11 @@ class GroupMember < ApplicationRecord
   scope :unmembers, ->(group_id) { Member.where.not(id: where(group_id: group_id).pluck(:member_id)) }
   
 
-  def self.chose_organizer(group_id)
-    gm = GroupMember.where(group_id: group_id).select{|gm| gm.is_head_at.nil?}
-    return [] if gm.blank?
-    gm.shuffle.first
-  end
-
-  def set_organizer
-    self.update!(is_head: true, is_head_at: Time.zone.now)
+  def self.set_organizer(group_id)
+    member = GroupMember.where(group_id: group_id).select{|gm| gm.is_head_at.nil?}
+    organizer = member.shuffle.first
+    organizer.update(is_head: true, is_head_at: Time.zone.now)
+    unorganizers = GroupMember.where("(group_id = ?) and (member_id != ?)", group_id, organizer.member_id)
+    unorganizers.map{|unorganizer| unorganizer.update(is_head: false, is_head_at: nil)}
   end
 end
