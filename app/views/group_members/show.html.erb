@@ -1,0 +1,33 @@
+<h1><%= @group.name%>のメンバ一覧</h1>
+
+<h3>グループに参加中のメンバー</h3>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Role</th>
+    <th></th>
+  </tr>
+  <% @members.each do |member|%>
+    <tr>
+      <td><%= member.name %></td>
+      <td>役割</td>
+      <td>脱退</td>
+    </tr>
+  <%end%>
+</table>
+
+<h3>グループに未参加のメンバー</h3>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th></th>
+  </tr>
+  <% @unmembers.each do |member|%>
+    <tr>
+      <td><%= member.name %></td>
+      <td>参加</td>
+    </tr>
+  <%end%>
+</table>
