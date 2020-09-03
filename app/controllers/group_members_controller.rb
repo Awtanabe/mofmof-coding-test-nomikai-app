@@ -14,4 +14,10 @@ class GroupMembersController < ApplicationController
     end
       redirect_to group_members_path(group_id: params[:id])
   end
+
+  def destroy
+    group_member = GroupMember.where(group_id: params[:group_id], member_id: params[:id]).first
+    group_member.destroy
+    redirect_to group_members_path(group_id: params[:group_id])
+  end
 end

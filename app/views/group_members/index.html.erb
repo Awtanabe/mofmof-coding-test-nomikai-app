@@ -16,7 +16,7 @@
     <tr>
       <td><%= member.name %></td>
       <td><%= member.is_head?(@group.id) ? 'organizer' : 'regular' %></td>
-      <td>脱退</td>
+      <td><%= button_to('脱退', group_member_path(member.id, group_id: @group.id), method: :delete)%></td>
     </tr>
   <%end%>
 </table>
