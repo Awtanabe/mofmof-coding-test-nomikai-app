@@ -10,12 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_03_024824) do
+ActiveRecord::Schema.define(version: 2020_09_03_161629) do
 
   create_table "group_members", force: :cascade do |t|
     t.integer "group_id", null: false
     t.integer "member_id", null: false
-    t.boolean "is_head"
+    t.boolean "is_head", default: false
     t.datetime "is_head_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
