@@ -1,0 +1,40 @@
+<h1><%= @group.name%>のメンバ一覧</h1>
+
+<h3>グループに参加中のメンバー</h3>
+
+<% if flash.present? %>
+  <% flash.each do |key, value|%>
+    <%= content_tag(:div, value, class: key)%>
+  <% end %>
+<%end%>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Role</th>
+    <th></th>
+  </tr>
+  <% @members.each do |member|%>
+    <tr>
+      <td><%= member.name %></td>
+      <td><%= member.is_organaizer?(@group.id) ? 'organizer' : 'regular' %></td>
+      <td><%= button_to('脱退', group_member_path(member.id, group_id: @group.id), method: :delete)%></td>
+    </tr>
+  <%end%>
+</table>
+<%= link_to '幹事を設定', add_head_group_member_path(@group.id) %>
+
+<h3>グループに未参加のメンバー</h3>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th></th>
+  </tr>
+  <% @unmembers.each do |member|%>
+    <tr>
+      <td><%= member.name %></td>
+      <td><%= button_to('参加する', group_members_path(group_id: @group.id ,member_id: member.id), method: :post) %></td>
+    </tr>
+  <%end%>
+</table>
